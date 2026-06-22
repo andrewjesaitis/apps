@@ -14,3 +14,8 @@ strictDepBuilds: true
 # Explicit allow-list for packages permitted to run build scripts.
 allowBuilds:
   esbuild: true
+
+# Pin nanoid to the provenance-attested 3.3.12 (satisfies postcss ^3.3.x) so
+# trustPolicy: no-downgrade stays intact (3.3.14 has no provenance attestation).
+overrides:
+  nanoid: 3.3.12
