@@ -1,0 +1,16 @@
+# Workspace packages + supply-chain hardening (carried from the carver repo).
+packages:
+  - 'apps/*'
+  - 'router'
+
+# 24h cooldown on newly-published versions (incl. transitive).
+minimumReleaseAge: 1440
+# Refuse a version whose publish-time trust signals regressed.
+trustPolicy: no-downgrade
+# Transitive deps may only resolve from the registry.
+blockExoticSubdeps: true
+# Any unallowed lifecycle script is a hard install failure.
+strictDepBuilds: true
+# Explicit allow-list for packages permitted to run build scripts.
+allowBuilds:
+  esbuild: true

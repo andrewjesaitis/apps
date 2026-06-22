@@ -1,0 +1,16 @@
+{
+  "name": "apps-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "lint": "pnpm -r lint",
+    "fmt": "pnpm -r fmt",
+    "fmt:check": "pnpm -r fmt:check",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "author": "Andrew Jesaitis",
+  "license": "MIT"
+}
