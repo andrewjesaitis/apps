@@ -1,0 +1,13 @@
+name = "apps-router"
+main = "src/index.js"
+compatibility_date = "2026-06-21"
+
+# Custom domains are claimed on deploy. demos.* must be released from the
+# carver-demo Pages project first, or wrangler rejects it as in-use.
+[[routes]]
+pattern = "apps.andrewjesaitis.com"
+custom_domain = true
+
+[[routes]]
+pattern = "demos.andrewjesaitis.com"
+custom_domain = true

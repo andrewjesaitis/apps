@@ -1,9 +1,0 @@
-{
-  "name": "apps-router",
-  "main": "src/index.js",
-  "compatibility_date": "2026-06-21",
-  "routes": [
-    { "pattern": "apps.andrewjesaitis.com", "custom_domain": true },
-    { "pattern": "demos.andrewjesaitis.com", "custom_domain": true }
-  ]
-}
