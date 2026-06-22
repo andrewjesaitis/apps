@@ -1,0 +1,38 @@
+{
+  "name": "carver",
+  "version": "1.0.0",
+  "description": "Seam carving web app",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "predev": "pnpm build:wasm",
+    "dev": "vite",
+    "build": "pnpm build:wasm && vite build",
+    "build:wasm": "cargo build --target wasm32-unknown-unknown --release -p carver-wasm && wasm-bindgen target/wasm32-unknown-unknown/release/carver_wasm.wasm --out-dir src/wasm/pkg --target web --typescript",
+    "pretest": "pnpm build:wasm",
+    "test": "vitest",
+    "test:rust": "cargo test -p carver-wasm",
+    "lint": "oxlint src",
+    "fmt": "oxfmt src",
+    "fmt:check": "oxfmt --check src",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "jsdom": "^29.1.1",
+    "oxfmt": "latest",
+    "oxlint": "latest",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14",
+    "vitest": "^4.1.7"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "author": "Andrew Jesaitis",
+  "license": "MIT"
+}
