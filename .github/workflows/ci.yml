@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      carver: ${{ steps.f.outputs.carver }}
+      pedals: ${{ steps.f.outputs.pedals }}
+      router: ${{ steps.f.outputs.router }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dorny/paths-filter@d1c1ffe0248fe513906c8e24db8ea791d46f8590 # v3
+        id: f
+        with:
+          filters: |
+            carver:
+              - 'apps/carver/**'
+            pedals:
+              - 'apps/pedals/**'
+            router:
+              - 'router/**'
+
+  pedals:
+    needs: changes
+    if: ${{ needs.changes.outputs.pedals == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter pedals lint
+      - run: pnpm --filter pedals fmt:check
+      - run: pnpm --filter pedals typecheck
+      - run: pnpm --filter pedals test -- --run
+
+  carver:
+    needs: changes
+    if: ${{ needs.changes.outputs.carver == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: dtolnay/rust-toolchain@67ef31d5b988238dd797d409d6f9574278e20537 # stable
+        with:
+          toolchain: stable
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@e18b497796c12c097a38f9edb9d0641fb99eee32 # v2
+        with:
+          workspaces: apps/carver -> apps/carver/target
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: cargo install wasm-bindgen-cli --version 0.2.122 --locked
+      - run: pnpm --filter carver lint
+      - run: pnpm --filter carver fmt:check
+      - run: pnpm --filter carver build:wasm
+      - run: pnpm --filter carver typecheck
+      - run: pnpm --filter carver test -- --run
+      - run: cargo test -p carver-wasm
+        working-directory: apps/carver
+
+  router:
+    needs: changes
+    if: ${{ needs.changes.outputs.router == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter router test -- --run

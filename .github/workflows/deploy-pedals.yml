@@ -1,0 +1,85 @@
+name: Deploy pedals
+
+on:
+  push:
+    branches: [main]
+    paths: ['apps/pedals/**', '.github/workflows/deploy-pedals.yml']
+  pull_request:
+    paths: ['apps/pedals/**', '.github/workflows/deploy-pedals.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-pedals-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter pedals build
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: pedals-dist
+          path: apps/pedals/dist
+          retention-days: 1
+
+  deploy:
+    needs: [build]
+    if: >-
+      github.ref == 'refs/heads/main' ||
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: pedals-dist
+          path: apps/pedals/dist
+
+      - name: Create Pages project (no-op if it already exists)
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create pedals-demo --production-branch=main
+
+      - name: Deploy (production)
+        if: github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=main --commit-hash=${{ github.sha }}
+
+      - name: Validate preview branch name
+        if: github.event_name == 'pull_request'
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if ! printf '%s' "$HEAD_REF" | grep -Eq '^[A-Za-z0-9._/-]+$'; then
+            echo "Refusing to deploy: branch name contains unexpected characters." >&2
+            exit 1
+          fi
+
+      - name: Deploy (preview)
+        if: github.event_name == 'pull_request'
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch="$HEAD_REF" --commit-hash=${{ github.event.pull_request.head.sha }}
