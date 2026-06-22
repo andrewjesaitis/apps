@@ -1,7 +1,5 @@
 # carver
 
-![Carver](https://raw.githubusercontent.com/andrewjesaitis/carver/master/towerSobelHorz.png "Carver")
-
 Browser-based seam carving app. Two interchangeable engines — a TypeScript implementation and a Rust port compiled to WebAssembly — selectable at runtime.
 
 ## Stack
