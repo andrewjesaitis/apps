@@ -5,6 +5,14 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    # Let a published version age before proposing it, and batch all action
+    # bumps into ONE grouped PR instead of a separate PR per action.
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - "*"
   - package-ecosystem: npm
     directory: /
     schedule:
