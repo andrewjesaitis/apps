@@ -1,6 +1,9 @@
-// Path-prefix -> Cloudflare Pages origin. Add one line per demo.
+// Path-prefix -> Cloudflare Pages origin (the project's canonical *.pages.dev,
+// from `wrangler pages deploy` output). NOTE: carver's is `carver-demo-efs`,
+// not `carver-demo` — the bare name was globally taken, so Cloudflare suffixed
+// this account's project. Verify the real subdomain in the deploy log before editing.
 export const APPS = {
-  carver: 'carver-demo.pages.dev',
+  carver: 'carver-demo-efs.pages.dev',
   pedals: 'pedals-demo.pages.dev',
 };
 

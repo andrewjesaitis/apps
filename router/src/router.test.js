@@ -4,7 +4,7 @@ import worker from './index.js';
 
 describe('resolve', () => {
   it('maps known prefixes to their Pages origin', () => {
-    expect(resolve('/carver/')).toBe('carver-demo.pages.dev');
+    expect(resolve('/carver/')).toBe('carver-demo-efs.pages.dev');
     expect(resolve('/pedals/app.js')).toBe('pedals-demo.pages.dev');
   });
   it('returns null for the root and unknown prefixes', () => {
