@@ -25,10 +25,6 @@ jobs:
           node-version: '22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      # Public "suggest values" config (site key + public web-app URL). These
-      # are non-secret repo variables; if unset they resolve to empty and the
-      # feature stays hidden. Set them under Settings → Secrets and variables →
-      # Actions → Variables to activate the feature on the deployed site.
       - run: pnpm --filter pedals build
         env:
           VITE_SUGGEST_URL: ${{ vars.VITE_SUGGEST_URL }}
@@ -71,12 +67,6 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=main --commit-hash=${{ github.sha }}
 
-      # Validate the branch name (fail closed on unexpected chars) and emit a
-      # Cloudflare-safe slug. wrangler-action does NOT expand shell "$VARS" in
-      # its `command` input, so we interpolate the slug via ${{ }} instead —
-      # otherwise every preview collapsed to a literal "head-ref" alias. The
-      # slug is [a-z0-9-] only, so interpolating it into the command is
-      # injection-safe.
       - name: Validate & slug preview branch name
         id: preview
         if: github.event_name == 'pull_request'
