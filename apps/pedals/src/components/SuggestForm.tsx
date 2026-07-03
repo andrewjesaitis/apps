@@ -6,7 +6,7 @@ import { submitSuggestion } from "../submit/client";
 import { SUGGEST_URL, TURNSTILE_SITE_KEY } from "../submit/config";
 
 const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "load-error";
 
 // Loads the Turnstile script once (only when this form first mounts, i.e. only
 // when the user enters edit mode) and resolves when window.turnstile is ready.
@@ -54,7 +54,7 @@ export default function SuggestForm({
         });
       })
       .catch(() => {
-        if (!cancelled) setStatus("error");
+        if (!cancelled) setStatus("load-error");
       });
     return () => {
       cancelled = true;
@@ -85,6 +85,11 @@ export default function SuggestForm({
       <div ref={widgetHost} className="suggest-captcha" />
       {status === "error" && (
         <p className="suggest-msg suggest-msg--error">Couldn&rsquo;t submit — please try again.</p>
+      )}
+      {status === "load-error" && (
+        <p className="suggest-msg suggest-msg--error">
+          Couldn&rsquo;t load the CAPTCHA — please refresh and try again.
+        </p>
       )}
       <div className="suggest-actions">
         <button type="button" className="suggest-btn" onClick={onCancel}>
