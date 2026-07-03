@@ -18,6 +18,7 @@ function doPost(e) {
     sheet.appendRow([new Date(), safeText_(body.name), safeText_(body.id), body.clip, body.gain, body.transp]);
     return json_({ ok: true });
   } catch (err) {
+    console.error("doPost failed", err);
     return json_({ ok: false, error: "server" });
   }
 }

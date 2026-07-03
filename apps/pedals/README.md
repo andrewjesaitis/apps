@@ -39,9 +39,10 @@ gated by a Cloudflare Turnstile CAPTCHA. Setup (one-time, manual):
    `TURNSTILE_SECRET` = your Turnstile secret key.
 3. **Deploy:** Deploy > New deployment > Web app; "Execute as: Me",
    "Who has access: Anyone". Copy the `/exec` URL.
-4. **Wire the client:** set build env vars (see `.env.example`):
+4. **Wire the client:** set two public build vars (see `.env.example`):
    - `VITE_SUGGEST_URL` = the `/exec` URL
    - `VITE_TURNSTILE_SITE_KEY` = the Turnstile site key
-   For local dev put these in `.env.local`. For the deployed site, set them in
-   the GitHub Actions build environment. The feature hides itself if either is
-   unset.
+   For local dev put these in `apps/pedals/.env.local`. For the deployed site,
+   add them as **repository Variables** (Settings → Secrets and variables →
+   Actions → Variables) — the `deploy-pedals.yml` build step already forwards
+   them. Until they're set they resolve to empty and the feature stays hidden.

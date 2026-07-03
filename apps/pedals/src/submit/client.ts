@@ -16,12 +16,18 @@ export async function submitSuggestion(
       body: JSON.stringify({ ...payload, token }),
     });
     if (!res.ok) return { ok: false, error: "server" };
+    // Trust only a well-formed success body — a 200 with a wrong-shaped body
+    // (e.g. an Apps Script HTML page) must never be reported as a write.
     try {
-      return (await res.json()) as SubmitResult;
-    } catch {
+      const data = (await res.json()) as Partial<SubmitResult>;
+      if (data?.ok === true) return { ok: true };
+      return { ok: false, error: typeof data?.error === "string" ? data.error : "server" };
+    } catch (err) {
+      console.error("submitSuggestion: unparseable response body", err);
       return { ok: false, error: "server" };
     }
-  } catch {
+  } catch (err) {
+    console.error("submitSuggestion: request failed", err);
     return { ok: false, error: "network" };
   }
 }

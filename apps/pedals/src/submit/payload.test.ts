@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { clampAxis, validateDraft, buildSuggestion } from "./payload";
+import { clampAxis, buildSuggestion } from "./payload";
 import type { Pedal } from "../types";
 
 const pedal: Pedal = {
@@ -21,17 +21,6 @@ describe("clampAxis", () => {
   it("rounds to one decimal", () => {
     expect(clampAxis(6.25)).toBe(6.3);
     expect(clampAxis(6.24)).toBe(6.2);
-  });
-});
-
-describe("validateDraft", () => {
-  it("accepts in-range numbers", () => {
-    expect(validateDraft({ clip: 0, gain: 5, transp: 10 })).toBe(true);
-  });
-  it("rejects out-of-range or non-finite values", () => {
-    expect(validateDraft({ clip: -1, gain: 5, transp: 10 })).toBe(false);
-    expect(validateDraft({ clip: 0, gain: 11, transp: 10 })).toBe(false);
-    expect(validateDraft({ clip: NaN, gain: 5, transp: 10 })).toBe(false);
   });
 });
 

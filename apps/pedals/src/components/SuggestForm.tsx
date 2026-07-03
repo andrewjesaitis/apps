@@ -38,16 +38,16 @@ export default function SuggestForm({
   onCancel: () => void;
 }) {
   const widgetHost = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string | undefined>(undefined);
   const [token, setToken] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
 
   useEffect(() => {
-    let widgetId: string | undefined;
     let cancelled = false;
     loadTurnstile()
       .then(() => {
         if (cancelled || !widgetHost.current || !window.turnstile || !TURNSTILE_SITE_KEY) return;
-        widgetId = window.turnstile.render(widgetHost.current, {
+        widgetId.current = window.turnstile.render(widgetHost.current, {
           sitekey: TURNSTILE_SITE_KEY,
           callback: (t) => setToken(t),
           "expired-callback": () => setToken(null),
@@ -58,7 +58,7 @@ export default function SuggestForm({
       });
     return () => {
       cancelled = true;
-      if (widgetId && window.turnstile) window.turnstile.remove(widgetId);
+      if (widgetId.current && window.turnstile) window.turnstile.remove(widgetId.current);
     };
   }, []);
 
@@ -66,7 +66,15 @@ export default function SuggestForm({
     if (!token || !SUGGEST_URL) return;
     setStatus("submitting");
     const result = await submitSuggestion(SUGGEST_URL, buildSuggestion(pedal, draft), token);
-    setStatus(result.ok ? "success" : "error");
+    if (result.ok) {
+      setStatus("success");
+      return;
+    }
+    // Turnstile tokens are single-use; reset the widget so a retry mints a fresh
+    // token instead of re-sending the spent one.
+    setStatus("error");
+    setToken(null);
+    if (widgetId.current && window.turnstile) window.turnstile.reset(widgetId.current);
   };
 
   if (status === "success") {

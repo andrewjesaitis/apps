@@ -19,5 +19,6 @@ interface Window {
       },
     ) => string;
     remove: (id: string) => void;
+    reset: (id: string) => void;
   };
 }
