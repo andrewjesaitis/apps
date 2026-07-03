@@ -25,3 +25,24 @@ Published at `demos.andrewjesaitis.com/pedals`.
 - Components own no math; they call geometry functions and render SVG.
 - Domain reasoning and data provenance: `docs/HANDOFF.md`,
   `docs/pedal-research-reference.md`.
+
+## Suggest-values feature (Google Sheet backend)
+
+Visitors can suggest clipping/gain/transparency for a pedal from the detail
+panel. Submissions append to a Google Sheet via a Google Apps Script web app,
+gated by a Cloudflare Turnstile CAPTCHA. Setup (one-time, manual):
+
+1. **Turnstile:** In the Cloudflare dashboard, create a Turnstile widget. Note
+   the **site key** (public) and **secret key** (private).
+2. **Sheet + Apps Script:** Create a Google Sheet. Extensions > Apps Script,
+   paste `apps-script/Code.gs`. In Project Settings > Script Properties, add
+   `TURNSTILE_SECRET` = your Turnstile secret key.
+3. **Deploy:** Deploy > New deployment > Web app; "Execute as: Me",
+   "Who has access: Anyone". Copy the `/exec` URL.
+4. **Wire the client:** set two public build vars (see `.env.example`):
+   - `VITE_SUGGEST_URL` = the `/exec` URL
+   - `VITE_TURNSTILE_SITE_KEY` = the Turnstile site key
+   For local dev put these in `apps/pedals/.env.local`. For the deployed site,
+   add them as **repository Variables** (Settings → Secrets and variables →
+   Actions → Variables) — the `deploy-pedals.yml` build step already forwards
+   them. Until they're set they resolve to empty and the feature stays hidden.
