@@ -11,6 +11,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 3,
     note: "The archetype: mid-hump centered ~723 Hz (ElectroSmash), symmetric soft clip in the op-amp feedback loop. Warm, smooth, compressed.",
+    demo: { youtubeId: "2aSbsMR7NyQ", source: "Reverb" },
   },
   {
     id: "ts9",
@@ -171,6 +172,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "LM308 op-amp (slow slew rate = natural treble roll-off) driving silicon diodes hard-clipped to ground. Aggressive, vocal, gritty; the Filter knob runs backwards from what newcomers expect.",
+    demo: { youtubeId: "0OqIo6BNTjE", source: "Sweetwater" },
   },
   {
     id: "ironhorse",
@@ -626,6 +628,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 1,
     note: "Four cascaded transistor gain/clipping stages stack into a near-square wave, making it one of the hardest-clipping fuzzes around despite each individual stage being soft. The mid-scoop (~1 kHz notch, ElectroSmash) is why it disappears in a mix unless stacked with a mid-forward pedal like a TS.",
+    demo: { youtubeId: "HcEuC4Difck", source: "Sam Goffen Guitar" },
   },
   // ── Additions (research dossier) ──────────────────────────────
   // Klon lineage

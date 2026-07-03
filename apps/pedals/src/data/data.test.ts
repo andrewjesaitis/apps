@@ -41,3 +41,36 @@ describe("pedal data", () => {
     }
   });
 });
+
+describe("demo videos", () => {
+  const withDemo = PEDALS.filter((p) => p.demo);
+
+  it("seeds at least 3 demo videos", () => {
+    expect(withDemo.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it("uses a valid 11-char YouTube id for every demo", () => {
+    for (const p of withDemo) {
+      const demo = p.demo;
+      if (!demo) continue;
+      expect(demo.youtubeId, `bad id on ${p.id}`).toMatch(/^[A-Za-z0-9_-]{11}$/);
+    }
+  });
+
+  it("uses non-negative integer start times when present", () => {
+    for (const p of withDemo) {
+      const demo = p.demo;
+      if (!demo || demo.start === undefined) continue;
+      expect(Number.isInteger(demo.start), `non-integer start on ${p.id}`).toBe(true);
+      expect(demo.start).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it("uses a non-empty source string when present", () => {
+    for (const p of withDemo) {
+      const demo = p.demo;
+      if (!demo || demo.source === undefined) continue;
+      expect(demo.source.trim().length, `empty source on ${p.id}`).toBeGreaterThan(0);
+    }
+  });
+});
