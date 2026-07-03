@@ -7,3 +7,7 @@ target
 .claude/
 docs/
 .superpowers/
+
+# local env files (real keys) — keep .env.example tracked
+.env.local
+.env*.local

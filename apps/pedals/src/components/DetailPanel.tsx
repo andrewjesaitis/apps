@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import SliderBar from "./SliderBar";
+import SuggestForm from "./SuggestForm";
+import { suggestionsEnabled } from "../submit/config";
+import type { Draft } from "../submit/payload";
 import type { LineageKey, Pedal, Voicing } from "../types";
 import { LINEAGES, VOICINGS, VOICING_COLOR, VOICING_INFO } from "../data/lineages";
 import { EQ } from "../data/eq";
@@ -48,41 +52,80 @@ function VoicingCard({ value }: { value: Voicing }) {
   );
 }
 
+function PedalDetail({ pedal }: { pedal: Pedal }) {
+  const lin = LINEAGES[pedal.lineage];
+  const color = VOICING_COLOR[pedal.voicing];
+  const eq = EQ[pedal.id];
+
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState<Draft>({
+    clip: pedal.clip,
+    gain: pedal.gain,
+    transp: pedal.transp,
+  });
+  useEffect(() => {
+    setEditing(false);
+    setDraft({ clip: pedal.clip, gain: pedal.gain, transp: pedal.transp });
+  }, [pedal.id, pedal.clip, pedal.gain, pedal.transp]);
+  const setAxis = (k: keyof Draft) => (v: number) => setDraft((d) => ({ ...d, [k]: v }));
+
+  return (
+    <aside className="detail">
+      <div className="detail-kicker">
+        <span style={{ color }}>{voicingLabel(pedal.voicing)}</span>
+        <span className="detail-voicing"> · {lin.label}</span>
+      </div>
+      <h2 className="detail-name">{pedal.name}</h2>
+      <div className="readouts">
+        <Waveform clip={editing ? draft.clip : pedal.clip} color={color} />
+        {eq && <EqCurve eq={eq} color={color} />}
+      </div>
+      {editing ? (
+        <>
+          <SliderBar label="CLIPPING" value={draft.clip} color={color} onChange={setAxis("clip")} />
+          <SliderBar label="GAIN" value={draft.gain} color={color} onChange={setAxis("gain")} />
+          <SliderBar
+            label="TRANSPARENCY"
+            value={draft.transp}
+            color={color}
+            invert
+            onChange={setAxis("transp")}
+          />
+          <SuggestForm pedal={pedal} draft={draft} onCancel={() => setEditing(false)} />
+        </>
+      ) : (
+        <>
+          <Bar label="CLIPPING" value={pedal.clip} color={color} />
+          <Bar label="GAIN" value={pedal.gain} color={color} />
+          <Bar label="TRANSPARENCY" value={pedal.transp} color={color} invert />
+          {suggestionsEnabled && (
+            <button type="button" className="suggest-btn" onClick={() => setEditing(true)}>
+              Suggest values
+            </button>
+          )}
+        </>
+      )}
+      {pedal.note && <p className="detail-note">{pedal.note}</p>}
+      <div className="context">
+        <div className="context-block">
+          <div className="context-head" style={{ color }}>
+            Voicing · {voicingLabel(pedal.voicing)}
+          </div>
+          <VoicingCard value={pedal.voicing} />
+        </div>
+        <div className="context-block">
+          <div className="context-head">Lineage · {lin.label}</div>
+          <p className="context-text">{lin.history}</p>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
 export default function DetailPanel({ pedal, solo }: { pedal: Pedal | null; solo: string | null }) {
   // A pedal is selected → full detail, with its voicing + lineage context.
   if (pedal) {
-    const lin = LINEAGES[pedal.lineage];
-    const color = VOICING_COLOR[pedal.voicing];
-    const eq = EQ[pedal.id];
-    return (
-      <aside className="detail">
-        <div className="detail-kicker">
-          <span style={{ color }}>{voicingLabel(pedal.voicing)}</span>
-          <span className="detail-voicing"> · {lin.label}</span>
-        </div>
-        <h2 className="detail-name">{pedal.name}</h2>
-        <div className="readouts">
-          <Waveform clip={pedal.clip} color={color} />
-          {eq && <EqCurve eq={eq} color={color} />}
-        </div>
-        <Bar label="CLIPPING" value={pedal.clip} color={color} />
-        <Bar label="GAIN" value={pedal.gain} color={color} />
-        <Bar label="TRANSPARENCY" value={pedal.transp} color={color} invert />
-        {pedal.note && <p className="detail-note">{pedal.note}</p>}
-        <div className="context">
-          <div className="context-block">
-            <div className="context-head" style={{ color }}>
-              Voicing · {voicingLabel(pedal.voicing)}
-            </div>
-            <VoicingCard value={pedal.voicing} />
-          </div>
-          <div className="context-block">
-            <div className="context-head">Lineage · {lin.label}</div>
-            <p className="context-text">{lin.history}</p>
-          </div>
-        </div>
-      </aside>
-    );
+    return <PedalDetail key={pedal.id} pedal={pedal} />;
   }
 
   // No pedal, but a tag is soloed → show that group's overview.
