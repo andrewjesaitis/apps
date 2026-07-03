@@ -71,7 +71,14 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=main --commit-hash=${{ github.sha }}
 
-      - name: Validate preview branch name
+      # Validate the branch name (fail closed on unexpected chars) and emit a
+      # Cloudflare-safe slug. wrangler-action does NOT expand shell "$VARS" in
+      # its `command` input, so we interpolate the slug via ${{ }} instead —
+      # otherwise every preview collapsed to a literal "head-ref" alias. The
+      # slug is [a-z0-9-] only, so interpolating it into the command is
+      # injection-safe.
+      - name: Validate & slug preview branch name
+        id: preview
         if: github.event_name == 'pull_request'
         env:
           HEAD_REF: ${{ github.head_ref }}
@@ -80,13 +87,13 @@ jobs:
             echo "Refusing to deploy: branch name contains unexpected characters." >&2
             exit 1
           fi
+          slug=$(printf '%s' "$HEAD_REF" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9' '-' | sed 's/--*/-/g; s/^-//; s/-$//' | cut -c1-63)
+          echo "branch=$slug" >> "$GITHUB_OUTPUT"
 
       - name: Deploy (preview)
         if: github.event_name == 'pull_request'
         uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
-        env:
-          HEAD_REF: ${{ github.head_ref }}
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch="$HEAD_REF" --commit-hash=${{ github.event.pull_request.head.sha }}
+          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=${{ steps.preview.outputs.branch }} --commit-hash=${{ github.event.pull_request.head.sha }}
