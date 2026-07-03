@@ -34,11 +34,19 @@ gated by a Cloudflare Turnstile CAPTCHA. Setup (one-time, manual):
 
 1. **Turnstile:** In the Cloudflare dashboard, create a Turnstile widget. Note
    the **site key** (public) and **secret key** (private).
-2. **Sheet + Apps Script:** Create a Google Sheet. Extensions > Apps Script,
-   paste `apps-script/Code.gs`. In Project Settings > Script Properties, add
-   `TURNSTILE_SECRET` = your Turnstile secret key.
+2. **Sheet + Apps Script:** Create a Google Sheet. Extensions > Apps Script
+   (this makes the script *container-bound* to that sheet — required for the
+   least-privilege scope below). Paste `apps-script/Code.gs`. Then Project
+   Settings (⚙️) > enable "Show 'appsscript.json' manifest file in editor" and
+   replace the manifest with `apps-script/appsscript.json` — it pins the OAuth
+   scopes to `spreadsheets.currentonly` (this one sheet only, not all your
+   spreadsheets) plus `script.external_request` (the Turnstile call). In
+   Project Settings > Script Properties, add `TURNSTILE_SECRET` = your
+   Turnstile secret key.
 3. **Deploy:** Deploy > New deployment > Web app; "Execute as: Me",
-   "Who has access: Anyone". Copy the `/exec` URL.
+   "Who has access: Anyone". Copy the `/exec` URL. On first deploy Google shows
+   an "unverified app" screen and requests authorization — this is expected for
+   a personal execute-as-me script; approve it (Advanced → Go to project).
 4. **Wire the client:** set two public build vars (see `.env.example`):
    - `VITE_SUGGEST_URL` = the `/exec` URL
    - `VITE_TURNSTILE_SITE_KEY` = the Turnstile site key
