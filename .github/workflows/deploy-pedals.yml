@@ -25,10 +25,6 @@ jobs:
           node-version: '22'
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      # Public "suggest values" config (site key + public web-app URL). These
-      # are non-secret repo variables; if unset they resolve to empty and the
-      # feature stays hidden. Set them under Settings → Secrets and variables →
-      # Actions → Variables to activate the feature on the deployed site.
       - run: pnpm --filter pedals build
         env:
           VITE_SUGGEST_URL: ${{ vars.VITE_SUGGEST_URL }}
@@ -71,7 +67,8 @@ jobs:
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=main --commit-hash=${{ github.sha }}
 
-      - name: Validate preview branch name
+      - name: Validate & slug preview branch name
+        id: preview
         if: github.event_name == 'pull_request'
         env:
           HEAD_REF: ${{ github.head_ref }}
@@ -80,13 +77,13 @@ jobs:
             echo "Refusing to deploy: branch name contains unexpected characters." >&2
             exit 1
           fi
+          slug=$(printf '%s' "$HEAD_REF" | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9' '-' | sed 's/--*/-/g; s/^-//; s/-$//' | cut -c1-63)
+          echo "branch=$slug" >> "$GITHUB_OUTPUT"
 
       - name: Deploy (preview)
         if: github.event_name == 'pull_request'
         uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
-        env:
-          HEAD_REF: ${{ github.head_ref }}
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch="$HEAD_REF" --commit-hash=${{ github.event.pull_request.head.sha }}
+          command: pages deploy apps/pedals/dist --project-name=pedals-demo --branch=${{ steps.preview.outputs.branch }} --commit-hash=${{ github.event.pull_request.head.sha }}
