@@ -17,7 +17,7 @@ export default function PedalVideoEmbed({
   if (!playing) {
     return (
       <button type="button" className="video-btn" onClick={() => setPlaying(true)}>
-        ▶ Hear this pedal
+        <span aria-hidden="true">▶</span> Hear this pedal
       </button>
     );
   }
