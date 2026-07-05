@@ -11,22 +11,29 @@ export default function App() {
   const [active, setActive] = useState<string | null>(null);
   const [solo, setSolo] = useState<string | null>(null);
   const [showLabels, setShowLabels] = useState(false);
+  // A deliberate selection (a dot click or a menu pick) locks the chart to that
+  // pedal so cursoring over other dots can't hijack it. Cleared when the user
+  // clicks empty space, hits Clear, or solos a tag.
+  const [locked, setLocked] = useState(false);
 
   const activePedal = useMemo(() => PEDALS.find((p) => p.id === active) ?? null, [active]);
 
   const pick = (id: string): void => {
     setActive(id);
     setSolo(null);
+    setLocked(true);
   };
   const soloTag = (tag: string): void => {
     setActive(null);
     setSolo((s) => (s === tag ? null : tag));
+    setLocked(false);
   };
   // A click on empty space (or the picker's Clear) drops both the active
   // selection and any soloed family, returning to the full overview.
   const clear = (): void => {
     setActive(null);
     setSolo(null);
+    setLocked(false);
   };
 
   return (
@@ -42,6 +49,7 @@ export default function App() {
           pedals={PEDALS}
           active={active}
           solo={solo}
+          locked={locked}
           showLabels={showLabels}
           onSelect={setActive}
           onPick={pick}
