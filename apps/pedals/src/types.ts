@@ -26,6 +26,14 @@ export type Voicing = "mid-scooped" | "mid-hump" | "mid-pushed" | "flat" | "brig
 
 export type Lineage = { label: string; color: string; history: string };
 
+// A single curated YouTube demo video for a pedal. `source` is the channel
+// name (e.g. "Pedal of the Day"), shown verbatim as a credit line.
+export type PedalDemo = {
+  youtubeId: string; // canonical 11-char video id
+  start?: number; // start offset in whole seconds (comparison-video timestamp)
+  source?: string; // demo's channel name — shown as "via …"
+};
+
 export type Pedal = {
   id: string;
   name: string;
@@ -38,6 +46,7 @@ export type Pedal = {
   pair?: string; // sweep-pair key
   end?: "lo" | "hi"; // sweep endpoint
   tag?: string; // discrete-mode label drawn in the dot
+  demo?: PedalDemo; // optional curated YouTube demo; absent = no player
 };
 
 export type EqBands = readonly [low: number, mid: number, high: number]; // −3 … +3

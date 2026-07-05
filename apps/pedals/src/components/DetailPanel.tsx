@@ -8,6 +8,7 @@ import { LINEAGES, VOICINGS, VOICING_COLOR, VOICING_INFO } from "../data/lineage
 import { EQ } from "../data/eq";
 import Waveform from "./Waveform";
 import EqCurve from "./EqCurve";
+import PedalVideoEmbed from "./PedalVideoEmbed";
 
 function Bar({
   label,
@@ -103,6 +104,7 @@ function PedalDetail({ pedal }: { pedal: Pedal }) {
               Suggest values
             </button>
           )}
+          {pedal.demo && <PedalVideoEmbed demo={pedal.demo} pedalName={pedal.name} />}
         </>
       )}
       {pedal.note && <p className="detail-note">{pedal.note}</p>}
