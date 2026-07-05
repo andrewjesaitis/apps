@@ -11,7 +11,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 3,
     note: "The archetype: mid-hump centered ~723 Hz (ElectroSmash), symmetric soft clip in the op-amp feedback loop. Warm, smooth, compressed.",
-    demo: { youtubeId: "2aSbsMR7NyQ", source: "Reverb" },
+    demo: { youtubeId: "2aSbsMR7NyQ", start: 24, source: "Reverb" },
   },
   {
     id: "ts9",
@@ -22,7 +22,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 3,
     note: "Same circuit family as the 808 with different output-stage resistor values — consensus is brighter and a bit grittier than the rounder 808.",
-    demo: { youtubeId: "C3XyLdmHbUY", source: "Sweetwater" },
+    demo: { youtubeId: "C3XyLdmHbUY", start: 110, source: "Sweetwater" },
   },
   {
     id: "sd1",
@@ -33,7 +33,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 3,
     note: "TS-derived but clipping is asymmetric (one extra diode) and gain range runs noticeably hotter than a stock TS — Boss added a tone knob the OD-1 lacked.",
-    demo: { youtubeId: "QiiPVe_7MsM", source: "Sweetwater" },
+    demo: { youtubeId: "QiiPVe_7MsM", start: 128, source: "Sweetwater" },
   },
   {
     id: "fulldrive_lo",
@@ -46,7 +46,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 5.5,
     note: "The Comp-Cut switch position lifts the clipping diodes out of circuit — louder, least compressed, closest to clean boost of the pedal's 3 clipping modes.",
-    demo: { youtubeId: "avRT3eAIO-M", source: "Pedal of the Day" },
+    demo: { youtubeId: "gkbWQS6yyWI", start: 47, source: "Jackson Brooksby" },
   },
   {
     id: "fulldrive_hi",
@@ -59,7 +59,7 @@ export const PEDALS: Pedal[] = [
     gain: 6.5,
     transp: 3,
     note: "Vintage/Flat-Mids clip mode with the separate Boost/Drive-2 footswitch engaged, stacking a second MOSFET gain stage well past stock TS territory.",
-    demo: { youtubeId: "avRT3eAIO-M", source: "Pedal of the Day" },
+    demo: { youtubeId: "gkbWQS6yyWI", start: 190, source: "Jackson Brooksby" },
   },
   {
     id: "plumes",
@@ -70,7 +70,7 @@ export const PEDALS: Pedal[] = [
     gain: 4.3,
     transp: 6,
     note: "TS808 reimagined with JFET op-amps and a 3-way clip switch: LED (boldest), no-diode/op-amp boost (most transparent), and asymmetric silicon (closest to stock TS).",
-    demo: { youtubeId: "DM8AFro-Yww", source: "Sweetwater" },
+    demo: { youtubeId: "DM8AFro-Yww", start: 68, source: "Sweetwater" },
   },
   {
     id: "erd",
@@ -81,7 +81,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 3,
     note: "A straight TS808 clone (same JRC4558, symmetric feedback-loop clipping) developed with Analog Mike, but true bypass instead of buffered.",
-    demo: { youtubeId: "GOHqsTDW0h0", source: "Sweetwater" },
+    demo: { youtubeId: "GOHqsTDW0h0", start: 73, source: "Sweetwater" },
   },
   {
     id: "od1",
@@ -117,7 +117,7 @@ export const PEDALS: Pedal[] = [
     gain: 1.5,
     transp: 9.5,
     note: "Per Wikipedia's Klon entry: 'the character of the pedal's germanium diodes only becomes apparent at the highest gain settings' — at low gain it's a near-transparent buffered boost with a treble lift.",
-    demo: { youtubeId: "fO8-RNUP78o", source: "JHS EXTRA" },
+    demo: { youtubeId: "MFg4fXGt35o", start: 10, source: "Eirik Stordrange" },
   },
   {
     id: "klon_hi",
@@ -130,7 +130,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 5,
     note: "Cranked, the dual-gang pot blends in more clipped signal — but per Premier Guitar's Klon-vs-Klone shootout, the germanium-diode mystique is overstated: 'a big, fat red herring.' The clean-blend topology and active EQ do most of the work.",
-    demo: { youtubeId: "fO8-RNUP78o", source: "JHS EXTRA" },
+    demo: { youtubeId: "MFg4fXGt35o", start: 287, source: "Eirik Stordrange" },
   },
   {
     id: "tumnus",
@@ -141,7 +141,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 7.5,
     note: "Compact Klon clone using surface-mount silicon diodes — Premier Guitar found it 'almost indistinguishable' from a real Centaur despite not using germanium.",
-    demo: { youtubeId: "uCM9XCFphkU", source: "Guitar Bonedo" },
+    demo: { youtubeId: "uCM9XCFphkU", start: 41, source: "Guitar Bonedo" },
   },
   {
     id: "archer",
@@ -152,7 +152,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 7.5,
     note: "Germanium-diode Klon clone Premier Guitar called the Centaur's 'sonic twin'; 18V internal headroom makes it a strong clean boost too.",
-    demo: { youtubeId: "_bRGzHNXWU8", source: "Sweetwater" },
+    demo: { youtubeId: "_bRGzHNXWU8", start: 97, source: "Sweetwater" },
   },
   {
     id: "soulfood",
@@ -163,7 +163,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 7,
     note: "Silicon-diode Klon clone with switchable true/buffered bypass — the budget favorite, often called 90% of a Klon for a fraction of the price.",
-    demo: { youtubeId: "gmtoCXKJvJ4", source: "Sweetwater" },
+    demo: { youtubeId: "6VxxD0fW_Jw", start: 55, source: "Sweetwater" },
   },
   {
     id: "conspiracy",
@@ -186,7 +186,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "LM308 op-amp (slow slew rate = natural treble roll-off) driving silicon diodes hard-clipped to ground. Aggressive, vocal, gritty; the Filter knob runs backwards from what newcomers expect.",
-    demo: { youtubeId: "0OqIo6BNTjE", source: "Sweetwater" },
+    demo: { youtubeId: "0OqIo6BNTjE", start: 92, source: "Sweetwater" },
   },
   {
     id: "ironhorse",
@@ -208,7 +208,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 4,
     note: "Boutique hand-built Greek Rat using NOS LM308N and asymmetric clipping — 'fat, creamy, extraordinary midrange, not scooped' rather than a razor-edge Rat clone.",
-    demo: { youtubeId: "L4MICDuP29E", source: "JAM pedals" },
+    demo: { youtubeId: "L4MICDuP29E", start: 72, source: "JAM pedals" },
   },
   // Bluesbreaker lineage
   {
@@ -243,7 +243,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 7,
     note: "Standard King of Tone overdrive voicing — a touch more gain than a Tube Screamer, Bluesbreaker DNA.",
-    demo: { youtubeId: "9TsvJB0GHUg", source: "Reverb" },
+    demo: { youtubeId: "9TsvJB0GHUg", start: 90, source: "Reverb" },
   },
   {
     id: "pot_ds",
@@ -255,7 +255,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 5.5,
     note: "Most gain and compression of the pedal's modes — more saturated and a touch more colored than OD mode.",
-    demo: { youtubeId: "9TsvJB0GHUg", source: "Reverb" },
+    demo: { youtubeId: "9TsvJB0GHUg", start: 75, source: "Reverb" },
   },
   {
     id: "pot_cb",
@@ -267,7 +267,7 @@ export const PEDALS: Pedal[] = [
     gain: 2,
     transp: 8.5,
     note: "The third mode, confirmed via Analogman: least distortion, least compression, and louder — 'a cross between a true clean boost and an overdrive.'",
-    demo: { youtubeId: "9TsvJB0GHUg", source: "Reverb" },
+    demo: { youtubeId: "9TsvJB0GHUg", start: 45, source: "Reverb" },
   },
   // Distortion+ / 250
   {
@@ -279,7 +279,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 5,
     note: "Op-amp boost into silicon diodes hard-clipped to ground — the higher diode threshold (vs. germanium) means more output and flatter mids than the Distortion+. Compresses like a cranked amp as gain rises.",
-    demo: { youtubeId: "fK6k-MA0wsg", source: "Eirik Stordrange" },
+    demo: { youtubeId: "fK6k-MA0wsg", start: 13, source: "Eirik Stordrange" },
   },
   {
     id: "distplus",
@@ -290,7 +290,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 4,
     note: "Same topology as the 250 but germanium clipping diodes — lower threshold gives a warmer, more compressed, more bass-attenuated character.",
-    demo: { youtubeId: "K7dMfGmoNCE", source: "Reverb" },
+    demo: { youtubeId: "K7dMfGmoNCE", start: 39, source: "Reverb" },
   },
   // Boss Distortion
   {
@@ -324,7 +324,7 @@ export const PEDALS: Pedal[] = [
     gain: 9,
     transp: 1,
     note: "Double clipping stage plus a parametric mid (200 Hz-5 kHz, ±~12 dB) and ±15 dB shelving EQ. The 'bees in a tin' reputation comes from maxing gain and scooping mids — disciplined EQ gives a legitimate metal voice.",
-    demo: { youtubeId: "ihMARdquhqc", source: "Reverb" },
+    demo: { youtubeId: "ihMARdquhqc", start: 30, source: "Reverb" },
   },
   // Dumble / tube-voiced (smooth saturation — the upper-left pocket)
   {
@@ -336,7 +336,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 5,
     note: "The original 'Dumble in a box.' MOSFET + diodes inside the op-amp feedback loop (soft, asymmetric). The unique Voice knob ties low-end and max gain together.",
-    demo: { youtubeId: "w6ldr5V2tdM", source: "Reverb" },
+    demo: { youtubeId: "w6ldr5V2tdM", start: 27, source: "Reverb" },
   },
   {
     id: "dude",
@@ -358,7 +358,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 4,
     note: "Starved-plate design: the op-amp generates the hard clipping and a low-voltage 12AX7 tames it (confirmed across multiple teardowns) — the tube isn't the main distortion source. Best as a boost/thickener into an already-driven amp; can sound loose into a clean amp. Gilmour, Eric Johnson, J Mascis. Tube-roll-sensitive; internal AC transformer, not a 9V jack.",
-    demo: { youtubeId: "rlkPB7OViK4", source: "guitary18" },
+    demo: { youtubeId: "6jaM2msHwmw", start: 70, source: "John Nathan Cordy" },
   },
   {
     id: "euphoria",
@@ -369,7 +369,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 6,
     note: "Dumble/Zendrive-family OD with a 3-way clip toggle (Smooth/Open/Crunch) and a Timmy-style pre-gain bass control — more range than a Zendrive.",
-    demo: { youtubeId: "4rCVUOLfNo0", source: "Sweetwater" },
+    demo: { youtubeId: "4rCVUOLfNo0", start: 77, source: "Sweetwater" },
   },
   {
     id: "kingsley",
@@ -380,7 +380,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 6,
     note: "Hand-wired in Maple Ridge, BC (Simon Jarrett) around a single 12AX7 running at real amp plate voltage (~238-250V) — genuinely amp-like and touch-sensitive, unlike starved-plate designs. The lowest-gain, most transparent 'always-on' boost in Kingsley's tube-pedal line; the Harlot/Minstrel are the higher-gain ODs. Built to order, long waits.",
-    demo: { youtubeId: "m-3W3wSpreA", source: "Kingsley" },
+    demo: { youtubeId: "m-3W3wSpreA", start: 117, source: "Kingsley" },
   },
   // Modern (MOSFET/FET-based and hard-clipping modern drives)
   {
@@ -394,7 +394,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 6.5,
     note: "Cleans up superbly with the guitar's volume knob at low drive — open, fairly transparent edge-of-breakup.",
-    demo: { youtubeId: "oP6AS49pjFw", source: "Sweetwater" },
+    demo: { youtubeId: "oP6AS49pjFw", start: 174, source: "Sweetwater" },
   },
   {
     id: "ocd_hi",
@@ -407,7 +407,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 5,
     note: "Per Fulltone's manual, the OCD was 'the first pedal to use MOSFETs as clipping devices,' configured as hard clippers to v-ref rather than to ground — asymmetric, around 30 dB of gain on tap. Bass can get flubby cranked.",
-    demo: { youtubeId: "oP6AS49pjFw", source: "Sweetwater" },
+    demo: { youtubeId: "oP6AS49pjFw", start: 5, source: "Sweetwater" },
   },
   {
     id: "most",
@@ -418,7 +418,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 6,
     note: "Despite the 'Mos' name, clipping is soft and symmetric (silicon diodes in the feedback loop via a CA3260 MOSFET-input op-amp), not hard MOSFET clipping. A low-to-medium-gain Nashville secret weapon alongside the ODR-1.",
-    demo: { youtubeId: "0L2MJwlZM8M", source: "Everything Guitar" },
+    demo: { youtubeId: "0L2MJwlZM8M", start: 53, source: "Everything Guitar" },
   },
   {
     id: "bd2_lo",
@@ -431,7 +431,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 6.5,
     note: "JFET-based asymmetric clipping. Low gain: open, dynamic and touch-sensitive — cleans up well with the guitar's volume.",
-    demo: { youtubeId: "0mi5ILzTGks", source: "Reverb" },
+    demo: { youtubeId: "N-P_94O0SF8", start: 165, source: "Leon Todd" },
   },
   {
     id: "bd2_hi",
@@ -444,7 +444,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 5,
     note: "Cranked: gainier and a bit raspy on top as the JFET clipping piles up. The basis for Keeley's 'Phat Mod'.",
-    demo: { youtubeId: "0mi5ILzTGks", source: "Reverb" },
+    demo: { youtubeId: "N-P_94O0SF8", start: 420, source: "Leon Todd" },
   },
   {
     id: "hotcake",
@@ -455,7 +455,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 5,
     note: "Despite the 'transparent overdrive' marketing, real-world consensus is mid-pushed and characterful, not flat — the Presence control actively adds midrange. FET-based asymmetric clipping (not diode-to-ground). NZ hand-built since the late '70s; Knopfler, Frampton, Thom Yorke.",
-    demo: { youtubeId: "x-J-EdtLQG4", source: "Noise Merchants" },
+    demo: { youtubeId: "x-J-EdtLQG4", start: 280, source: "Noise Merchants" },
   },
   // Transparent / original
   {
@@ -467,7 +467,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 9,
     note: "The benchmark transparent OD. Cut-only bass (pre-clip) and treble (post-clip) controls — genuinely flat at minimum, unlike most 'transparent' drives. The EQ knobs work backwards from intuition (more cut clockwise).",
-    demo: { youtubeId: "3dWD7WrMNSk", source: "Reverb" },
+    demo: { youtubeId: "3dWD7WrMNSk", start: 25, source: "Reverb" },
   },
   {
     id: "lightspeed",
@@ -478,7 +478,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 9,
     note: "Frequently named alongside the Timmy as one of the most genuinely neutral overdrives — soft clipping, rich overtones, a gentle push that stacks well.",
-    demo: { youtubeId: "_AlKq0twB_I", source: "Pedal of the Day" },
+    demo: { youtubeId: "_AlKq0twB_I", start: 7, source: "Pedal of the Day" },
   },
   {
     id: "odr1",
@@ -501,7 +501,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 5,
     note: "Mode I — low-gain, symmetric silicon soft clipping: smooth and compressed.",
-    demo: { youtubeId: "crESW1S60hA", source: "Pedal of the Day" },
+    demo: { youtubeId: "lh2MeRCsCD4", start: 110, source: "Brett Kingman" },
   },
   {
     id: "ages2",
@@ -513,7 +513,7 @@ export const PEDALS: Pedal[] = [
     gain: 3.6,
     transp: 7,
     note: "Mode II — low-gain, symmetric LED soft clipping: open, pushed and sparkly.",
-    demo: { youtubeId: "crESW1S60hA", source: "Pedal of the Day" },
+    demo: { youtubeId: "lh2MeRCsCD4", start: 191, source: "Brett Kingman" },
   },
   {
     id: "ages3",
@@ -525,7 +525,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 4,
     note: "Mode III — high-gain, symmetric silicon soft clipping: tighter, more saturated.",
-    demo: { youtubeId: "crESW1S60hA", source: "Pedal of the Day" },
+    demo: { youtubeId: "lh2MeRCsCD4", start: 256, source: "Brett Kingman" },
   },
   {
     id: "ages4",
@@ -537,7 +537,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 5,
     note: "Mode IV — high-gain, symmetric LED soft clipping: big, punchy, a bit looser.",
-    demo: { youtubeId: "crESW1S60hA", source: "Pedal of the Day" },
+    demo: { youtubeId: "lh2MeRCsCD4", start: 314, source: "Brett Kingman" },
   },
   {
     id: "ages5",
@@ -549,7 +549,7 @@ export const PEDALS: Pedal[] = [
     gain: 7.6,
     transp: 3,
     note: "Mode V — high-gain, symmetric silicon hard clipping: thick, chewy, heavily compressed, cranked-stack territory. Reviewers note a persistent mid-hump 'bark' across all five modes that a Dry-blend knob can only partly tune out.",
-    demo: { youtubeId: "crESW1S60hA", source: "Pedal of the Day" },
+    demo: { youtubeId: "lh2MeRCsCD4", start: 373, source: "Brett Kingman" },
   },
   {
     id: "phat",
@@ -583,7 +583,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 3,
     note: "The modern-Marshall high-gain benchmark, voiced after Friedman's BE-100 head. Tight, percussive, lots of usable top and bottom; internal gain trimmer.",
-    demo: { youtubeId: "puG4qRhr3sM", source: "Sweetwater" },
+    demo: { youtubeId: "puG4qRhr3sM", start: 157, source: "Sweetwater" },
   },
   {
     id: "jhsat",
@@ -594,7 +594,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 4,
     note: "Began as the 'AT' (2016), a modified JHS Angry Charlie (JCM800-voiced) tailored to Andy Timmons; the 'AT+' adds an independent footswitchable boost — reportedly a fixed-parameter clone of Andy's own TS808 (per Josh Scott). Drive channel is identical to the original AT. Mid-forward, articulate, and notably doesn't bury fumbled notes; 25/50/100-watt voicing toggle, Air presence control, single tone knob (no dedicated mid).",
-    demo: { youtubeId: "K9c_cIcULsI", source: "JHS Pedals" },
+    demo: { youtubeId: "K9c_cIcULsI", start: 157, source: "JHS Pedals" },
   },
   {
     id: "flb1991",
@@ -605,7 +605,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 3,
     note: "Hand-built by Andy Ilgunas (Norwich, UK) with YouTuber Matt Webster — named for Pearl Jam's Ten (1991). Confirmed across multiple outlets as an original two-stage design: a TS808-voiced Gain 1 feeding a JCM800-voiced Gain 2, with a full 3-band EQ. Mid-forward, sparkly, easy on the bass; even at zero gain it's too hot to be a clean boost.",
-    demo: { youtubeId: "2lHU3IMyy2Y", source: "Chris Prescott Guitar" },
+    demo: { youtubeId: "AeH6kQmNeOA", start: 75, source: "Let's Play All" },
   },
   {
     id: "guvnor",
@@ -616,7 +616,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "The 1988 grandfather of every Marshall-in-a-box pedal. Red LEDs as clipping diodes to ground (higher threshold than silicon = slightly less compressed) plus a passive 3-band tone stack. Gary Moore, Carcass.",
-    demo: { youtubeId: "HylRMDmBk08", source: "Sweetwater" },
+    demo: { youtubeId: "HylRMDmBk08", start: 280, source: "Sweetwater" },
   },
   {
     id: "angrycharlie",
@@ -627,7 +627,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "A Guv'nor-derived circuit with a different tone stack and a wider, more usable low-gain range — the platform the AT+ was built on.",
-    demo: { youtubeId: "y74JhbfT4jU", source: "Eirik Stordrange" },
+    demo: { youtubeId: "3FsTqx8pDo0", start: 65, source: "JHS Pedals" },
   },
   {
     id: "plexidrive",
@@ -661,7 +661,7 @@ export const PEDALS: Pedal[] = [
     gain: 2,
     transp: 6,
     note: "Discrete JFET preamp based on the Maestro EP-3 Echoplex preamp — deliberately adds warmth and shimmer rather than staying perfectly clean. The classic 'always-on' trick (Page, EVH, EJ).",
-    demo: { youtubeId: "dlwXIX805zY", source: "Reverb" },
+    demo: { youtubeId: "dlwXIX805zY", start: 47, source: "Reverb" },
   },
   {
     id: "microamp",
@@ -684,7 +684,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 1,
     note: "Four cascaded transistor gain/clipping stages stack into a near-square wave, making it one of the hardest-clipping fuzzes around despite each individual stage being soft. The mid-scoop (~1 kHz notch, ElectroSmash) is why it disappears in a mix unless stacked with a mid-forward pedal like a TS.",
-    demo: { youtubeId: "pi2IUvAZVlg", source: "Sweetwater" },
+    demo: { youtubeId: "pi2IUvAZVlg", start: 110, source: "Sweetwater" },
   },
   // ── Additions (research dossier) ──────────────────────────────
   // Klon lineage
@@ -709,7 +709,7 @@ export const PEDALS: Pedal[] = [
     gain: 4,
     transp: 7,
     note: "Mode 1 of the 2025 5-way diode selector: 1N34A germanium — the original Voyager voice, most compressed. Klon-style mid-focused preamp/OD with a footswitchable parametric mid-EQ.",
-    demo: { youtubeId: "3KEJE14e3w8", source: "Walrus Audio" },
+    demo: { youtubeId: "3KEJE14e3w8", start: 135, source: "Walrus Audio" },
   },
   {
     id: "voyager3",
@@ -721,7 +721,7 @@ export const PEDALS: Pedal[] = [
     gain: 5,
     transp: 6,
     note: "Mode 3: symmetric silicon clipping — more open and dynamic than the germanium mode, with a brighter top end.",
-    demo: { youtubeId: "3KEJE14e3w8", source: "Walrus Audio" },
+    demo: { youtubeId: "3KEJE14e3w8", start: 153, source: "Walrus Audio" },
   },
   {
     id: "voyager5",
@@ -733,7 +733,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 5,
     note: "Mode 5: asymmetric silicon plus a bass boost — least compressed, fattest low end of the five modes.",
-    demo: { youtubeId: "3KEJE14e3w8", source: "Walrus Audio" },
+    demo: { youtubeId: "3KEJE14e3w8", start: 169, source: "Walrus Audio" },
   },
   // Fuzz lineage
   {
@@ -745,7 +745,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 3,
     note: "Hybrid germanium/silicon four-transistor Big Muff-style fuzz (loosely the Green Russian Sovtek). Smooth, organic, articulate sustain. The Shift control moves the tone-stack notch so you can scoop or boost the mids.",
-    demo: { youtubeId: "kDwlVslnkzk", source: "EarthQuaker Devices" },
+    demo: { youtubeId: "kDwlVslnkzk", start: 13, source: "EarthQuaker Devices" },
   },
   {
     id: "redmuck",
@@ -768,7 +768,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 3,
     note: "Mode I of the five-state fuzz: silicon clipping — compressed and smooth. Ram's Head-derived core; a Voltage knob (3V starved to 18V open) spans dying-battery sputter to wide-open.",
-    demo: { youtubeId: "Vwp6jysKLJY", source: "Guitar Bonedo" },
+    demo: { youtubeId: "ZC7svYMPpko", start: 217, source: "Brett Kingman" },
   },
   {
     id: "eons3",
@@ -780,7 +780,7 @@ export const PEDALS: Pedal[] = [
     gain: 6,
     transp: 4,
     note: "Mode III: germanium — crunchy and dynamic, a distortion/fuzz hybrid that cleans up with the guitar's volume.",
-    demo: { youtubeId: "Vwp6jysKLJY", source: "Guitar Bonedo" },
+    demo: { youtubeId: "ZC7svYMPpko", start: 290, source: "Brett Kingman" },
   },
   {
     id: "eons5",
@@ -792,7 +792,7 @@ export const PEDALS: Pedal[] = [
     gain: 9,
     transp: 2,
     note: "Mode V: hard-clipping silicon with soft LED diodes — the loudest, angriest, most saturated of the five modes.",
-    demo: { youtubeId: "Vwp6jysKLJY", source: "Guitar Bonedo" },
+    demo: { youtubeId: "ZC7svYMPpko", start: 422, source: "Brett Kingman" },
   },
   {
     id: "velvet",
@@ -803,7 +803,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "A Muff-adjacent fuzz voiced like a fuzz into a cranked EL34 stack; smooth singing sustain, defined lows. The 'Big' setting is the compressed voicing; the 'Tight' switch removes that compression, shifting toward a harder distortion character.",
-    demo: { youtubeId: "Db57TF5JIlM", source: "Sweetwater" },
+    demo: { youtubeId: "Db57TF5JIlM", start: 100, source: "Sweetwater" },
   },
   {
     id: "fuzzface_ge",
@@ -827,7 +827,7 @@ export const PEDALS: Pedal[] = [
     gain: 7,
     transp: 3,
     note: "The silicon BC108 Fuzz Face: brighter, harsher, higher-gain and more stable than the germanium version, and it doesn't fully clean up. The two transistor types — germanium and silicon — behave very differently and are best understood as distinct pedals.",
-    demo: { youtubeId: "uLADZrTLLvM", source: "gearmanndude" },
+    demo: { youtubeId: "xqdQq5HmNnk", start: 585, source: "Andertons Music Co" },
   },
   {
     id: "octavix",
@@ -838,7 +838,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 2,
     note: "Octave-up fuzz in the Octavia/Tycobrahe lineage (transformer-based, silicon transistors), with a 9V/24V toggle (saggy vs tighter/richer octave). Hendrix 'Purple Haze' splat; octave content is clearest above the 12th fret on the neck pickup.",
-    demo: { youtubeId: "AsqfcWuogPU", source: "Electro-Harmonix" },
+    demo: { youtubeId: "x9lwBiFyoQA", start: 90, source: "Sweetwater" },
   },
   // Boost lineage — treble boosters
   {
@@ -850,7 +850,7 @@ export const PEDALS: Pedal[] = [
     gain: 3,
     transp: 4,
     note: "The Moonshot is a Class-A germanium (AC128) treble/mid booster in the Dallas Rangemaster lineage. A Treble/Mid blend knob sweeps from treble boost to fuller mids; strong bass cut, snarly, pushes an amp's front end into singing OD. Positive-ground, needs an isolated supply.",
-    demo: { youtubeId: "Pw6_d1RRDHI", source: "Reverb" },
+    demo: { youtubeId: "Pw6_d1RRDHI", start: 56, source: "Reverb" },
   },
   {
     id: "rooster",
@@ -874,7 +874,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 3,
     note: "No-apologies high-gain distortion (silicon/LED hard clipping, slight mid-cut, late-'80s/'90s metal voicing). Mode I: LED hard clipping — the fastest, tightest mode for palm mutes. A Blend knob keeps clean definition for stacking.",
-    demo: { youtubeId: "q_ISeI2KZfQ", source: "Pedal of the Day" },
+    demo: { youtubeId: "TKp0FdSHr4w", start: 94, source: "Brett Kingman" },
   },
   {
     id: "eras2",
@@ -886,7 +886,7 @@ export const PEDALS: Pedal[] = [
     gain: 8,
     transp: 3,
     note: "Mode II: silicon hard clipping — smoother and more compressed than the LED mode. Tight, chuggy, very low noise floor; 'somewhere between Soldano and Mesa.'",
-    demo: { youtubeId: "q_ISeI2KZfQ", source: "Pedal of the Day" },
+    demo: { youtubeId: "TKp0FdSHr4w", start: 250, source: "Brett Kingman" },
   },
   {
     id: "eras3",
@@ -898,6 +898,6 @@ export const PEDALS: Pedal[] = [
     gain: 9,
     transp: 2,
     note: "Mode III: dual silicon + LED clipping — the richest, fullest mode with the most sustain.",
-    demo: { youtubeId: "q_ISeI2KZfQ", source: "Pedal of the Day" },
+    demo: { youtubeId: "TKp0FdSHr4w", start: 263, source: "Brett Kingman" },
   },
 ];
