@@ -12,6 +12,7 @@ type Props = {
   pedals: Pedal[];
   active: string | null;
   solo: string | null;
+  locked: boolean;
   showLabels: boolean;
   onSelect: (id: string | null) => void;
   onPick: (id: string) => void;
@@ -22,6 +23,7 @@ export default function Chart({
   pedals,
   active,
   solo,
+  locked,
   showLabels,
   onSelect,
   onPick,
@@ -42,9 +44,6 @@ export default function Chart({
     return pair ? (pair.lo.id === active ? pair.hi.id : pair.lo.id) : null;
   }, [active, sweeps]);
 
-  // Dot opacity: full for the active/lit dots, a "transparent" highlight for
-  // the active dot's gain-pair partner, dim for everything else. `solo` is a
-  // tag (lineage key or voicing value); active overrides the tag.
   const dotOpacity = (p: Pedal): number => {
     if (active) {
       if (p.id === active) return 1;
@@ -56,14 +55,14 @@ export default function Chart({
   const sweepDim = (lo: Pedal, hi: Pedal): boolean =>
     active ? !(active === lo.id || active === hi.id) : !!solo && !pedalHasTag(lo, solo);
 
-  // When a tag is soloed, only dots carrying it update the detail panel on
-  // hover — cursoring over the dimmed dots won't hijack it.
+  // While locked to a deliberate selection, hover is inert
   const hoverSelect = (p: Pedal): void => {
+    if (locked) return;
     if (!solo || pedalHasTag(p, solo)) onSelect(p.id);
   };
-  // In solo mode, hover is a transient preview: leaving a dot restores the
-  // full tag view. (Outside solo mode, a hovered selection stays put.)
+
   const hoverEnd = (): void => {
+    if (locked) return;
     if (solo) onSelect(null);
   };
 
